@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5000/api/auth';
+  private apiUrl = 'https://tictactoe-backend-v4u0.onrender.com/api/auth';
   
   // BehaviorSubject tracks login state across the whole app
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());

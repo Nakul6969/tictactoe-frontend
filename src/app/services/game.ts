@@ -7,7 +7,7 @@ import { AuthService } from './auth';
   providedIn: 'root'
 })
 export class GameService {
-  private apiUrl = 'http://localhost:5000/api/game';
+  private apiUrl = 'https://tictactoe-backend-v4u0.onrender.com/api/game';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
