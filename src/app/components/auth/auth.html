@@ -1,0 +1,52 @@
+<div class="auth-container">
+  <mat-card class="auth-card">
+    <mat-card-title>Welcome to Apex TicTacToe</mat-card-title>
+
+    <mat-tab-group>
+      <!-- LOGIN TAB -->
+      <mat-tab label="Login">
+        <div class="form-container">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" [(ngModel)]="loginData.email" placeholder="nakul@test.com"/>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" [(ngModel)]="loginData.password"/>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="full-width"
+            (click)="login()" [disabled]="isLoading">
+            {{ isLoading ? 'Logging in...' : 'Login' }}
+          </button>
+        </div>
+      </mat-tab>
+
+      <!-- REGISTER TAB -->
+      <mat-tab label="Register">
+        <div class="form-container">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput [(ngModel)]="registerData.username" placeholder="nakul"/>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" [(ngModel)]="registerData.email"/>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" [(ngModel)]="registerData.password"/>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="full-width"
+            (click)="register()" [disabled]="isLoading">
+            {{ isLoading ? 'Registering...' : 'Register' }}
+          </button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

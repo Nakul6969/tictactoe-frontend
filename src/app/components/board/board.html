@@ -1,0 +1,81 @@
+<div class="game-container">
+  <mat-card class="game-card">
+
+    <mat-card-title>🎮 Apex TicTacToe</mat-card-title>
+
+    <!-- Settings row -->
+    <div class="settings-row">
+
+      <!-- Board size -->
+      <mat-form-field appearance="outline">
+        <mat-label>Board Size</mat-label>
+        <mat-select [(ngModel)]="boardSize" (ngModelChange)="changeSize()">
+          <mat-option [value]="3">3 x 3</mat-option>
+          <mat-option [value]="4">4 x 4</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Game mode -->
+      <mat-form-field appearance="outline">
+        <mat-label>Mode</mat-label>
+        <mat-select [(ngModel)]="gameMode" (ngModelChange)="changeMode()">
+          <mat-option value="ai">vs AI</mat-option>
+          <mat-option value="twoPlayer">2 Players</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Difficulty (only show in AI mode) -->
+      <mat-form-field appearance="outline" *ngIf="gameMode === 'ai'">
+        <mat-label>Difficulty</mat-label>
+        <mat-select [(ngModel)]="difficulty" (ngModelChange)="changeDifficulty()">
+          <mat-option value="easy">Easy</mat-option>
+          <mat-option value="medium">Medium</mat-option>
+          <mat-option value="hard">Hard</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <!-- Scoreboard -->
+    <div class="scoreboard">
+      <div class="score-item">
+        <span class="score-label">{{ gameMode === 'twoPlayer' ? 'Player X' : 'You (X)' }}</span>
+        <span class="score-value x-color">{{ scores.X }}</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">Draw</span>
+        <span class="score-value">{{ scores.Draw }}</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">{{ gameMode === 'twoPlayer' ? 'Player O' : 'AI (O)' }}</span>
+        <span class="score-value o-color">{{ scores.O }}</span>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="status" [class.ai-thinking]="isAiThinking">
+      {{ statusMessage }}
+    </div>
+
+    <!-- Board -->
+    <div class="board" [style.grid-template-columns]="'repeat(' + boardSize + ', 1fr)'">
+      <ng-container *ngFor="let row of getRows()">
+        <button
+          *ngFor="let index of row"
+          class="cell"
+          [class]="getCellClass(index)"
+          [class.small]="boardSize === 4"
+          [disabled]="!!board[index] || gameOver || isAiThinking"
+          (click)="makeMove(index)">
+          {{ board[index] }}
+        </button>
+      </ng-container>
+    </div>
+
+    <!-- New game -->
+    <button mat-raised-button color="primary" class="new-game-btn" (click)="initBoard()">
+      New Game
+    </button>
+
+  </mat-card>
+</div>

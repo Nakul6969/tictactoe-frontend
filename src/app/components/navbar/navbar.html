@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <span>♟ Apex TicTacToe</span>
+  <span style="flex: 1"></span>
+
+  <ng-container *ngIf="isLoggedIn; else loggedOut">
+    <span style="margin-right: 16px">👋 {{ username }}</span>
+    <button mat-button routerLink="/game">Game</button>
+    <button mat-button routerLink="/leaderboard">Leaderboard</button>
+    <button mat-raised-button (click)="logout()">Logout</button>
+  </ng-container>
+
+  <ng-template #loggedOut>
+    <button mat-button routerLink="/auth">Login</button>
+    <button mat-button routerLink="/leaderboard">Leaderboard</button>
+  </ng-template>
+</mat-toolbar>
